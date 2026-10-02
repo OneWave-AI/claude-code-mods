@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'claude-code/testing'
 
-import { FIRE_ROWS, barText, bracket, burnt, compare, crossed, fireCells, heat, lifetimeDelta, modelName, modelsLine, money, pct, resetsIn, tallyTurn, tokens, tween, windows } from '../hooks/burn'
+import { FIRE_ROWS, barText, bracket, burnt, compare, crossed, fireCells, heat, lifetimeDelta, modelName, modelsLine, money, pct, resetsIn, tallyTurn, tokenCount, tween, windows } from '../hooks/burn'
 
 describe('burn math', () => {
   test('money formats cents and fractions of a cent', async () => {
@@ -91,6 +91,6 @@ describe('burn math', () => {
     expect(modelName('claude-haiku-4-5-20251001')).toBe('haiku 4.5')
     expect(modelName('gpt-x')).toBe('gpt-x')
     expect(modelsLine(m)).toBe('opus 5.5 102k in 5k out · haiku 4.5 51k in 500 out')
-    expect(tokens(1_200_000)).toBe('1.2M')
+    expect(tokenCount(1_200_000)).toBe('1.2M')
   })
 })

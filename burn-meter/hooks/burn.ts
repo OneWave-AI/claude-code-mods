@@ -9,9 +9,9 @@ export const THINGS: readonly Thing[] = [
   { one: 'McDouble', many: 'McDoubles', usd: 3.19 },
 ]
 
-/** `$12.34`, always two decimals; four under a cent so the first fractions still move. */
+/** Dollars with two decimals (12.34), or four under a cent so the first fractions still move. */
 export const money = (usd: number) =>
-  usd > 0 && usd < 0.01 ? `$${usd.toFixed(4)}` : `$${usd.toFixed(2)}`
+  '$' + (usd > 0 && usd < 0.01 ? usd.toFixed(4) : usd.toFixed(2))
 
 /** `= 1.4 burritos` for the thing at `index`, wrapping. */
 export const compare = (usd: number, index: number) => {
@@ -22,7 +22,7 @@ export const compare = (usd: number, index: number) => {
 }
 
 /** `842`, `84k`, `1.2M`. */
-export const tokens = (n: number) =>
+export const tokenCount = (n: number) =>
   n < 1000 ? `${Math.round(n)}` : n < 1e6 ? `${Math.round(n / 1000)}k` : `${(n / 1e6).toFixed(1)}M`
 
 type Tally = { input: number; output: number; turns: number }
@@ -52,7 +52,7 @@ export const modelsLine = (models: Readonly<Record<string, Tally>>, max = 3) =>
   Object.entries(models)
     .sort((a, b) => b[1].output - a[1].output)
     .slice(0, max)
-    .map(([id, t]) => `${modelName(id)} ${tokens(t.input)} in ${tokens(t.output)} out`)
+    .map(([id, t]) => `${modelName(id)} ${tokenCount(t.input)} in ${tokenCount(t.output)} out`)
     .join(' · ')
 
 type Limit = { kind: string; percentUsed: number; resetsAt?: string }
