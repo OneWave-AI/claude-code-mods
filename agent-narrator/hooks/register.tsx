@@ -43,6 +43,15 @@ const endRun = async ($: EngineInterface) => {
 }
 
 /** Turns one model rewrite into a warmer line; the template line stays if the call fails. */
+/** The short fields of a tool input, never file bodies or edit text, capped for the model call. */
+const brief = (input: Record<string, unknown>) => {
+  const keep = ['file_path', 'path', 'pattern', 'command', 'url', 'query', 'description']
+  const picked = Object.fromEntries(
+    keep.filter(k => typeof input[k] === 'string').map(k => [k, String(input[k]).slice(0, 120)]),
+  )
+  return JSON.stringify(picked).slice(0, 400)
+}
+
 const polish = async ($: EngineInterface, id: string, text: string, detail: string) => {
   const r = await $.model.complete({
     model: 'haiku',
@@ -64,7 +73,7 @@ const begin = async ($: EngineInterface, id: string, tool: string, input: Record
   await update($, feed, list => [...list, step].slice(-KEEP))
   await update($, run, r => ({ ...r, steps: r.steps + 1 }))
   $.ui.status(`Agent: ${n.text}`)
-  if (await read($, isSmart)) void polish($, id, n.text, `${tool} ${JSON.stringify(input)}`).catch(() => undefined)
+  if (await read($, isSmart)) void polish($, id, n.text, `${tool} ${brief(input)}`).catch(() => undefined)
   return step
 }
 
