@@ -1,0 +1,60 @@
+{
+  "name": "claude-code-mods",
+  "description": "Ten open-source Claude Code mods by OneWave AI: panes, bands, status lines and tool-call guards",
+  "owner": {
+    "name": "OneWave AI",
+    "url": "https://www.onewave-ai.com"
+  },
+  "plugins": [
+    {
+      "name": "agent-narrator",
+      "source": "./agent-narrator",
+      "description": "Watch the agent work: every step in plain English, with a live time-saved counter"
+    },
+    {
+      "name": "agent-race",
+      "source": "./agent-race",
+      "description": "Race Claude Code sessions on a task: live split-screen race track scoreboard"
+    },
+    {
+      "name": "boss-fight",
+      "source": "./boss-fight",
+      "description": "Failing tests spawn a pixel boss; every run that fixes tests lands a hit, zero failures is a KO with loot"
+    },
+    {
+      "name": "burn-meter",
+      "source": "./burn-meter",
+      "description": "Live session cost odometer above the prompt: a burning fuse, real-world comparisons, threshold alerts"
+    },
+    {
+      "name": "code-pet",
+      "source": "./code-pet",
+      "description": "A pixel pet that lives in a pane and reacts to what Claude does: eats on tool calls, gets sick on failures, panics on rm -rf, sleeps when idle, evolves as you ship"
+    },
+    {
+      "name": "inbox-alerts",
+      "source": "./inbox-alerts",
+      "description": "Gmail + Slack alerts inside Claude Code: toasts, status count, and an Alerts pane"
+    },
+    {
+      "name": "inner-monologue",
+      "source": "./inner-monologue",
+      "description": "A pane of Claude's dry inner thoughts about your session, typed out live"
+    },
+    {
+      "name": "launch-codes",
+      "source": "./launch-codes",
+      "description": "Dangerous Bash commands need launch codes: red alert pane, siren, a code to arm and a LAUNCH to fire"
+    },
+    {
+      "name": "session-wrapped",
+      "source": "./session-wrapped",
+      "description": "Spotify Wrapped for a Claude Code session: an animated stat reveal and a shareable PNG card"
+    },
+    {
+      "name": "sportscaster",
+      "source": "./sportscaster",
+      "description": "Live TV play-by-play of your Claude Code session, spoken aloud with crowd effects"
+    }
+  ]
+}

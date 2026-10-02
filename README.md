@@ -25,6 +25,15 @@ These are a mix of useful and ridiculous. All of them are MIT licensed. Fork the
 
 Requires Claude Code 2.1.287 or later.
 
+The fastest way is the plugin marketplace. In a Claude Code session:
+
+```
+/plugin marketplace add OneWave-AI/claude-code-mods
+/plugin install burn-meter@claude-code-mods
+```
+
+Swap `burn-meter` for any mod name in the table. To hack on them instead, clone the repo:
+
 ```bash
 git clone https://github.com/OneWave-AI/claude-code-mods.git ~/claude-code-mods
 ```
