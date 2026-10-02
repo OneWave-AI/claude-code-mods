@@ -9,5 +9,11 @@
     "url": "https://www.onewave-ai.com"
   },
   "homepage": "https://github.com/OneWave-AI/claude-code-mods/tree/main/code-pet",
-  "repository": "https://github.com/OneWave-AI/claude-code-mods"
+  "repository": "https://github.com/OneWave-AI/claude-code-mods",
+  "displayName": "Code Pet",
+  "icon": "./.claude-plugin/icon.png",
+  "documentationUrl": "https://github.com/OneWave-AI/claude-code-mods/blob/main/code-pet/README.md",
+  "supportUrl": "https://www.onewave-ai.com/contact",
+  "privacyPolicyUrl": "https://www.onewave-ai.com/privacy",
+  "termsOfServiceUrl": "https://www.onewave-ai.com/terms"
 }
