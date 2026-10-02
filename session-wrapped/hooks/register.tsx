@@ -76,14 +76,14 @@ const stamp = (now: number) => {
   return `${d.getFullYear()}-${two(d.getMonth() + 1)}-${two(d.getDate())}-${two(d.getHours())}${two(d.getMinutes())}`
 }
 
-/** Writes the PNG with the system's base64 decoder: `$.fs.write` takes text alone. */
+/** Writes the PNG with the system's base64 decoder (`$.fs.write` takes text alone), or a bundled Python helper where base64 has no -o. */
 const savePng = async ($: EngineInterface, s: Stats, usage: Usage | null, now: number, isDemo: boolean) => {
   const home = (await $.env.get('HOME')) ?? '/tmp'
   const path = `${home}/Desktop/claude-wrapped-${stamp(now)}${isDemo ? '-demo' : ''}.png`
   const png = toBase64(renderCard(allCards(s, usage, now), dateLabel(now), isDemo))
   const ran = await $.process.run(['base64', '-D', '-o', path], { stdin: png, timeoutMs: 20_000 })
   if (ran.exitCode !== 0) {
-    const fallback = await $.process.run(['sh', '-c', 'base64 -d > "$1"', 'sh', path], { stdin: png, timeoutMs: 20_000 })
+    const fallback = await $.process.run(['python3', `${$.plugin.root}/scripts/write_b64.py`, path], { stdin: png, timeoutMs: 20_000 })
     if (fallback.exitCode !== 0) throw new Error(ran.stderr || fallback.stderr || 'base64 failed')
   }
   return path
