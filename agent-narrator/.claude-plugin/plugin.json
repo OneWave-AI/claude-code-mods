@@ -5,6 +5,9 @@
   "types": "./types/index.d.ts",
   "license": "MIT",
   "author": {
-    "name": "Claude Code Mods contributors"
-  }
+    "name": "OneWave AI",
+    "url": "https://www.onewave-ai.com"
+  },
+  "homepage": "https://github.com/OneWave-AI/claude-code-mods/tree/main/agent-narrator",
+  "repository": "https://github.com/OneWave-AI/claude-code-mods"
 }
