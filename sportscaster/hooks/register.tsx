@@ -76,25 +76,37 @@ const speak = async ($: EngineInterface, line: string) => {
     // The voice is not installed here: fall back to the system default once.
     if (!voice) return
     voice = undefined
-    await $.audio.speak(line).catch(() => undefined)
+    try {
+      await $.audio.speak(line)
+    } catch {
+      // no voice at all: stay silent
+    }
   }
 }
 
-const crowd = ($: EngineInterface, fx: Fx) => {
-  if (fx) void $.audio.play({ base64: fxClip(fx), mime: 'audio/wav' }, { gain: fx === 'cheer' ? 0.7 : 0.6 }).catch(() => undefined)
+const crowd = async ($: EngineInterface, fx: Fx) => {
+  if (!fx) return
+  try {
+    await $.audio.play({ base64: fxClip(fx), mime: 'audio/wav' }, { gain: fx === 'cheer' ? 0.7 : 0.6 })
+  } catch {
+    // no audio device: the play-by-play still shows
+  }
 }
 
 const call = async ($: EngineInterface, play: Play) => {
-  const reply = await $.model
-    .complete({
+  let line = ''
+  try {
+    const reply = await $.model.complete({
       model: 'haiku',
       system: ANNOUNCER,
       prompt: announcerPrompt(play, recent.slice(-4)),
       maxTokens: 60,
       effort: 'low',
     })
-    .catch(() => null)
-  const line = reply?.isAnswered ? speakable(reply.text) : ''
+    if (reply.isAnswered) line = speakable(reply.text)
+  } catch {
+    // the model is unavailable: fall back to the scripted line
+  }
   return line || play.fallback
 }
 
@@ -109,7 +121,7 @@ const onAir = async ($: EngineInterface) => {
     recent.push(line)
     if (recent.length > 8) recent.shift()
     await post($, line, play.at, play.fx)
-    crowd($, play.fx)
+    void crowd($, play.fx)
     await say($, line)
   } finally {
     isOnAir = false
@@ -125,7 +137,7 @@ const runDemo = async ($: EngineInterface) => {
     $.clock.after(wait, () => {
       void (async () => {
         await post($, line, wait, fx)
-        crowd($, fx)
+        void crowd($, fx)
         await say($, line)
         if (i === DEMO.length - 1) isDemo = false
       })()
