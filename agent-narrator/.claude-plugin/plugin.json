@@ -1,0 +1,10 @@
+{
+  "name": "agent-narrator",
+  "version": "0.1.0",
+  "description": "Watch the agent work: every step in plain English, with a live time-saved counter",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Claude Code Mods contributors"
+  }
+}

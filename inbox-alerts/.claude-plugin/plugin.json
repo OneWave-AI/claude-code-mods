@@ -1,0 +1,24 @@
+{
+  "name": "inbox-alerts",
+  "version": "0.1.0",
+  "description": "Gmail + Slack alerts inside Claude Code: toasts, status count, and an Alerts pane",
+  "types": "./types/index.d.ts",
+  "userConfig": {
+    "email": {
+      "type": "string",
+      "title": "Your email",
+      "description": "Your Gmail address, so your own sent mail is not an alert",
+      "default": ""
+    },
+    "slackUserId": {
+      "type": "string",
+      "title": "Your Slack user ID",
+      "description": "Your Slack member ID (U...), used to find mentions and DMs",
+      "default": ""
+    }
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Claude Code Mods contributors"
+  }
+}

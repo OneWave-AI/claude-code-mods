@@ -1,0 +1,10 @@
+{
+  "name": "inner-monologue",
+  "version": "0.1.0",
+  "description": "A pane of Claude's dry inner thoughts about your session, typed out live",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Claude Code Mods contributors"
+  }
+}

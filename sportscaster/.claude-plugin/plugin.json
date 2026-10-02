@@ -1,0 +1,10 @@
+{
+  "name": "sportscaster",
+  "version": "0.1.0",
+  "description": "Live TV play-by-play of your Claude Code session, spoken aloud with crowd effects",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Claude Code Mods contributors"
+  }
+}

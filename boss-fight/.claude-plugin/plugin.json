@@ -1,0 +1,10 @@
+{
+  "name": "boss-fight",
+  "version": "0.1.0",
+  "description": "Failing tests spawn a pixel boss; every run that fixes tests lands a hit, zero failures is a KO with loot",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Claude Code Mods contributors"
+  }
+}

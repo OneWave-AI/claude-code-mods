@@ -1,0 +1,10 @@
+{
+  "name": "agent-race",
+  "version": "0.1.0",
+  "description": "Race Claude Code sessions on a task: live split-screen race track scoreboard",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Claude Code Mods contributors"
+  }
+}

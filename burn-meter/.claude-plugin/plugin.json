@@ -1,0 +1,10 @@
+{
+  "name": "burn-meter",
+  "version": "0.1.0",
+  "description": "Live session cost odometer above the prompt: a burning fuse, real-world comparisons, threshold alerts",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Claude Code Mods contributors"
+  }
+}

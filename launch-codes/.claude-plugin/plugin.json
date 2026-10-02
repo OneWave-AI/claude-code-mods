@@ -1,0 +1,10 @@
+{
+  "name": "launch-codes",
+  "version": "0.1.0",
+  "description": "Dangerous Bash commands need launch codes: red alert pane, siren, a code to arm and a LAUNCH to fire",
+  "types": "./types/index.d.ts",
+  "license": "MIT",
+  "author": {
+    "name": "Claude Code Mods contributors"
+  }
+}
