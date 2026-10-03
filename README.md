@@ -1,6 +1,6 @@
 # Claude Code Mods
 
-Ten mods for Claude Code, built in one night by [OneWave AI](https://www.onewave-ai.com).
+Eleven mods for Claude Code, built in one night by [OneWave AI](https://www.onewave-ai.com).
 
 Read the write-up: [Claude Code Mods: What They Are, and the Ten We Open-Sourced](https://www.onewave-ai.com/blog/claude-code-mods).
 
@@ -18,6 +18,7 @@ These are a mix of useful and ridiculous. All of them are MIT licensed. Fork the
 | [inner-monologue](#inner-monologue) | [`inner-monologue/`](inner-monologue/) | `/monologue` | A pane of Claude's dry inner thoughts about your session |
 | [sportscaster](#sportscaster) | [`sportscaster/`](sportscaster/) | `/caster` | TV play-by-play of your session, spoken aloud, with crowd effects |
 | [agent-narrator](#agent-narrator) | [`agent-narrator/`](agent-narrator/) | `/narrate` | Every agent step in plain English, with a time-saved counter. Built for showing non-engineers |
+| [swarm](#swarm) | [`swarm/`](swarm/) | `/swarm` | Live map of subagents and agent teams: who spawned whom, what each is doing, who is talking |
 | [agent-race](#agent-race) | [`agent-race/`](agent-race/) | `/race` | Race several Claude Code sessions on the same task on a live scoreboard |
 | [inbox-alerts](#inbox-alerts) | [`inbox-alerts/`](inbox-alerts/) | `/alerts` | Gmail, Slack, and Calendar alerts inside Claude Code as toasts, a status count, and a pane |
 
@@ -131,6 +132,14 @@ Play-by-play commentary on the session, spoken aloud with generated crowd audio 
 
 Translates every tool call into one plain-English sentence ("Reading the pricing page to find the old numbers") and keeps a running estimate of time saved. `/narrate smart` uses a model call per step; the default is rule-based and free. `/narrate demo` plays a scripted session. We built this for training sessions where the audience has never seen an agent work.
 
+### swarm
+
+[Source](./swarm) · [hooks/register.tsx](./swarm/hooks/register.tsx) · `claude --plugin-dir ~/claude-code-mods/swarm`
+
+![swarm](screenshots/swarm.png)
+
+`/swarm` opens mission control for subagents and agent teams. An orchestration tree nests every agent under whoever spawned it, with its type, model, live action and tool-call count. Below it: a timeline of how the agents overlap, arcs and a log for messages between teammates, and an activity feed. A status line keeps the live count, and a toast sums up the run when the swarm stands down.
+
 ### agent-race
 
 [Source](./agent-race) · [hooks/register.tsx](./agent-race/hooks/register.tsx) · `claude --plugin-dir ~/claude-code-mods/agent-race`
@@ -155,7 +164,7 @@ A mod is code that runs inside Claude Code with your permissions. It is not sand
 claude plugin validate ~/claude-code-mods/<mod>
 ```
 
-The `hooks:` and `calls:` lines list every event it handles and everything it asks Claude Code to do. What these ten reach:
+The `hooks:` and `calls:` lines list every event it handles and everything it asks Claude Code to do. What these eleven reach:
 
 | Mod | Network | Runs processes | Files | Calls a model | Sends data anywhere |
 | --- | --- | --- | --- | --- | --- |
@@ -167,6 +176,7 @@ The `hooks:` and `calls:` lines list every event it handles and everything it as
 | inner-monologue | No | No | No | Yes, a summary of recent tool calls and the first 120 characters of each prompt | Only to your Claude model, and only while the pane is open |
 | sportscaster | No | No | No | Yes, a summary of recent tool calls | Only to your Claude model |
 | agent-narrator | No | No | No | Only with `/narrate smart`: the tool name and short fields (path, command), never file contents | Only to your Claude model |
+| swarm | No | No | No | No | No |
 | agent-race | No | No | Reads and writes `~/.claude/agent-race/<race>/` | No | No |
 | inbox-alerts | Through your claude.ai Gmail, Slack and Calendar connectors | No | No | `/alerts triage` sends alert snippets to Claude | Only to your Claude model |
 

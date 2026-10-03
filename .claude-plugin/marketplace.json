@@ -1,6 +1,6 @@
 {
   "name": "claude-code-mods",
-  "description": "Ten open-source Claude Code mods by OneWave AI: panes, bands, status lines and tool-call guards",
+  "description": "Eleven open-source Claude Code mods by OneWave AI: panes, bands, status lines and tool-call guards",
   "owner": {
     "name": "OneWave AI",
     "url": "https://www.onewave-ai.com"
@@ -55,6 +55,11 @@
       "name": "sportscaster",
       "source": "./sportscaster",
       "description": "Live TV play-by-play of your Claude Code session, spoken aloud with crowd effects"
+    },
+    {
+      "name": "swarm",
+      "source": "./swarm",
+      "description": "Mission control for subagents and agent teams: who is running, what each is doing, who spawned whom, who is talking to whom"
     }
   ]
 }
