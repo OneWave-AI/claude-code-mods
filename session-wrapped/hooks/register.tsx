@@ -99,7 +99,7 @@ const startReveal = async ($: EngineInterface, isDemo: boolean) => {
   // Fresh numbers each reveal: the scan reads only transcripts changed since the last one.
   const usage = isDemo ? demoUsage(now) : await scanUsage($)
   await update($, reveal, r => ({ shown: 0, isDemo, savedPath: null, generation: r.generation + 1, stats: frozen, usage, at: now }))
-  const opened = await $.ui.open({ id: PANE, title: 'Session Wrapped', focus: true, rows: 36 })
+  const opened = await $.ui.open({ id: PANE, title: 'Session Wrapped', focus: true, closeOnEscape: true, rows: 36 })
   revealTimer?.cancel()
   const total = allCards(frozen, usage, now).length
   const timer = $.clock.every(STEP_MS, () => {
@@ -126,7 +126,7 @@ export const register: Register = on => {
   on('session.start', async ($, e, next) => {
     await $.command.register({
       name: 'wrapped',
-      description: 'Session Wrapped: animated stat reveal + a shareable PNG card. /wrapped [demo]',
+      description: 'Session Wrapped: animated stat reveal + a shareable PNG card. /wrapped [demo|close]',
     })
     const s = await read($, stats)
     if (s.startedAt === 0) {
@@ -170,10 +170,17 @@ export const register: Register = on => {
   })
 
   on('command.run', { command: 'wrapped' }, async ($, e) => {
-    const isDemo = e.args.trim().toLowerCase() === 'demo'
+    const args = e.args.trim().toLowerCase()
+    if (args === 'close') {
+      revealTimer?.cancel()
+      revealTimer = null
+      await $.ui.close({ id: PANE }).catch(() => undefined)
+      return { text: 'Wrapped closed.' }
+    }
+    const isDemo = args === 'demo'
     const done = await startReveal($, isDemo)
     if (!done.path) return { text: `Wrapped is revealing in the pane, but the PNG did not save: ${done.error ?? 'unknown error'}` }
-    return { text: `Wrapped${isDemo ? ' (demo)' : ''}: card saved to ${done.path}` }
+    return { text: `Wrapped${isDemo ? ' (demo)' : ''}: card saved to ${done.path}. Esc or /wrapped close closes the pane.` }
   })
 
   on('ui.render', { component: 'Pane', requestId: PANE }, async ($, e) => {

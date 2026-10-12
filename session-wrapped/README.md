@@ -6,6 +6,8 @@ Spotify Wrapped for a Claude Code session: an animated stat reveal and a shareab
 
 `/wrapped` plays an animated stat reveal (session length, tool calls, MVP tool, red-to-green test runs, longest turn, cost) and writes a 1200px PNG card to your Desktop. Week and month totals come from `scripts/usage.py`, which reads your local transcripts in `~/.claude/projects` and caches the rollups. Needs `python3`. Nothing leaves your machine.
 
+The pane closes with Escape (while it has the keyboard, or at an empty prompt) or with `/wrapped close`. On the main-screen layout a mouse click does not reach the pane, so the key and the command are the way out.
+
 ## Install
 
 In a Claude Code session (2.1.287 or later):
